@@ -1,0 +1,305 @@
+#==========SomeStuff==========#
+
+set $mod Mod4
+
+# Moving key
+set $up l
+set $down k
+set $left j
+set $right semicolon
+
+font pango:Dejavu Sans Mono 11
+
+for_window [class="^.*"] border pixel 2
+default_floating_border pixel 2
+gaps inner 10
+gaps outer 0
+
+#==========i3_Keybindings==========#
+
+# Workspaces Name
+set $ws1 1
+set $ws2 2
+set $ws3 3
+set $ws4 4
+set $ws5 5
+set $ws6 6
+set $ws7 7
+set $ws8 8
+set $ws9 9
+
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# next/previous workspace
+bindsym Mod1+Tab workspace next
+bindsym Mod1+Shift+Tab workspace prev
+bindsym $mod+Tab workspace back_and_forth
+
+#navigate workspaces next / previous
+bindsym Mod1+Ctrl+Right workspace next
+bindsym Mod1+Ctrl+Left workspace prev
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# kill focused window
+bindsym $mod+q kill
+
+# Make the currently focused window a scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the first scratchpad window
+bindsym $mod+minus scratchpad show
+
+#=========i3_Tilling==========#
+
+# orientation for new workspaces
+default_orientation horizontal
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# Enter fullscreen mode for the focused container
+# Super + F in arcolinux is execute thunar
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+# qwerty/azerty issue for letter z
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# resize window (you can also use the mouse for that)
+
+bindsym $mod+r mode "resize"
+
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+       bindsym $left       resize shrink width 10 px or 10 ppt
+       bindsym $down       resize grow height 10 px or 10 ppt
+       bindsym $up         resize shrink height 10 px or 10 ppt
+       bindsym $right      resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+       bindsym Left        resize shrink width 15 px or 15 ppt
+       bindsym Down        resize grow height 15 px or 15 ppt
+       bindsym Up          resize shrink height 15 px or 15 ppt
+       bindsym Right       resize grow width 15 px or 15 ppt
+
+        # back to normal: Enter or Escape
+       bindsym Return mode "default"
+       bindsym Escape mode "default"
+}
+
+#==========Run_Launchers==========#
+
+bindsym $mod+d exec --no-startup-id rofi -show run
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
+#==========Application==========#
+
+bindsym $mod+Return exec --no-startup-id alacritty;focus
+
+bindsym control+mod1+u exec --no-startup-id pavucontrol
+
+bindsym $mod+Shift+Return exec --no-startup-id pcmanfm;focus
+
+#==========Open applications on specific workspaces=========#
+
+assign [class="Brave-browser"] $ws1
+assign [class="discord"] $ws2
+
+#==========System_Keybindings=========#
+
+# Screenshot
+             # Take full screenshot, place in ~/img/scrot, copy to clipboard
+bindsym --release $mod+Print exec "scrot 'scrot-%Y-%m-%d_%h-%m-%s_$wx$h.png' -e 'mv $f ~/Pictures/scrot/ && xclip -t image/png ~/Pictures/scrot/$f -sel clip'"
+             # Take selection screenshot, place in ~/img/scrot, copy to clipboard
+bindsym --release $mod+Shift+Print exec "scrot --select 'scrot-%Y-%m-%d_%h-%m-%s_$wx$h_snip.png' -e 'mv $f ~/Pictures/scrot/ && xclip -t image/png ~/Pictures/scrot/$f -sel clip'"
+
+# Audio Settings
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +3% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -3% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec light -A 5 # increase screen brightness
+bindsym XF86MonBrightnessDown exec light -U 5 # decrease screen brightness
+
+#==========Open_Application_Floating==========#
+
+for_window [class="TelegramDesktop" instance="telegram-desktop"] floating enable;focus
+for_window [class="Google-chrome" instance="crx_amfojhdiedpdnlijjbhjnhokbnohfdfb"] floating enable;focus
+for_window [class="Pcmanfm" instance="pcmanfm"] floating enable;focus
+for_window [class="zoom" instance="zoom"] floating enable;focus
+for_window [class="Nitrogen" instance="nitrogen"] floating enable;focus
+for_window [class="zalo.exe" instance="zalo.exe"] floating enable
+for_window [class="bottles" instance="bottles"] floating enable
+for_window [class="Sxiv" instance="sxiv"] floating enable;focus
+for_window [class="stacer" instance="stacer"] floating enable;focus
+
+#==========i3-gaps_change==========#
+
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+mode "$mode_gaps" {
+        bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+mode "$mode_gaps_inner" {
+        bindsym plus  gaps inner current plus 5
+        bindsym minus gaps inner current minus 5
+        bindsym 0     gaps inner current set 0
+
+        bindsym Shift+plus  gaps inner all plus 5
+        bindsym Shift+minus gaps inner all minus 5
+        bindsym Shift+0     gaps inner all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_outer" {
+        bindsym plus  gaps outer current plus 5
+        bindsym minus gaps outer current minus 5
+        bindsym 0     gaps outer current set 0
+
+        bindsym Shift+plus  gaps outer all plus 5
+        bindsym Shift+minus gaps outer all minus 5
+        bindsym Shift+0     gaps outer all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+#==========Bar_Toggle=========#
+
+# bar toggle, hide or show
+bindsym $mod+b bar mode toggle
+
+bindsym $mod+i bar mode invisible
+
+#==========Auto_Start==========#
+
+# Authentication dialog (polkit-gnome)
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+
+# reset Wallpaper
+exec_always --no-startup-id nitrogen --restore
+
+# Mount Drive
+exec_always --no-startup-id rclone --vfs-cache-mode writes mount "onedrive":  ~/OneDrive
+
+# start Picom
+exec --no-startup-id picom -b
+
+exec_always --no-startup-id ~/.config/i3/scripts/mouse.sh
+
+# Start FCITX5
+exec --no-startup-id fcitx5 -d
+
+# Start Clipboard_manager
+exec --no-startup-id parcellite
+
+#==========Colors_For_Some_Stuff=========#
+
+# solarized accents
+set $yellow #b58900
+set $orange #cb4b16
+set $red #dc322f
+set $magenta #d33682
+set $violet #6c71c4
+set $blue #268bd2
+set $cyan #2aa198
+set $green #859900
+# solarized dark
+set $baseA3 #002b36
+set $baseA2 #073642
+set $baseA1 #586e75
+set $baseA0 #657b83
+set $baseB0 #839496
+set $baseB1 #93a1a1
+set $baseB2 #eee8d5
+set $baseB3 #fdf6e3
+set $custom #1c5766
+
+# clientclass  border     backgr. text   indicator child_border
+client.focused          #b29871 #5F676A #FFFFFF #b29871   #b29871
+client.focused_inactive #333333 #5F676A #FFFFFF #484E50   #5F676A
+client.unfocused        #333333 #222222 #888888 #292D2E   #222222
+client.urgent           #2F343A #900000 #FFFFFF #900000   #900000
+client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
+
