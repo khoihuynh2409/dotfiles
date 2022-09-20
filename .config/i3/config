@@ -161,6 +161,7 @@ mode "resize" {
 #==========Run_Launchers==========#
 
 bindsym $mod+d exec --no-startup-id rofi -show run
+bindsym $mod+Shift+e exec --no-startup-id ~/.config/rofi/scripts/powermenu/powermenu.sh
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 #==========Application==========#
@@ -179,9 +180,9 @@ assign [class="discord"] $ws2
 #==========System_Keybindings=========#
 
 # Screenshot
-             # Take full screenshot, place in ~/img/scrot, copy to clipboard
+    # Take full screenshot, place in ~/img/scrot, copy to clipboard
 bindsym --release $mod+Print exec "scrot 'scrot-%Y-%m-%d_%h-%m-%s_$wx$h.png' -e 'mv $f ~/Pictures/scrot/ && xclip -t image/png ~/Pictures/scrot/$f -sel clip'"
-             # Take selection screenshot, place in ~/img/scrot, copy to clipboard
+    # Take selection screenshot, place in ~/img/scrot, copy to clipboard
 bindsym --release $mod+Shift+Print exec "scrot --select 'scrot-%Y-%m-%d_%h-%m-%s_$wx$h_snip.png' -e 'mv $f ~/Pictures/scrot/ && xclip -t image/png ~/Pictures/scrot/$f -sel clip'"
 
 # Audio Settings
@@ -248,9 +249,8 @@ mode "$mode_gaps_outer" {
 #==========Bar_Toggle=========#
 
 # bar toggle, hide or show
-bindsym $mod+b bar mode toggle
-
-bindsym $mod+i bar mode invisible
+# bindsym $mod+b bar mode toggle
+# bindsym $mod+i bar mode invisible
 
 #==========Auto_Start==========#
 
