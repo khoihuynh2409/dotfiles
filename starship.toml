@@ -1,21 +1,36 @@
 add_newline = false
 
+# format = """
+# [┌─────────](bold green)$username$hostname
+# [│](bold green)$directory$git_branch$git_status
+# [└─>](bold green)$character"""
+
 format = """
-[┌─────────](bold green)$username$hostname
-[│](bold green)$directory$git_branch$git_status
-[└─>](bold green)$character"""
+$hostname$username$directory$git_branch$git_status
+$character"""
+
+#[username]
+#style_user = "yellow bold"
+#style_root = "red bold"
+#format = "[┤](bold green)[$user]($style)[│](bold green)"
+#show_always = true
 
 [username]
-style_user = "yellow bold"
+style_user = "blue bold"
 style_root = "red bold"
-format = "[┤](bold green)[$user]($style)[│](bold green)"
+format = "[\\[](bold red)[$user]($style)[\\]](bold red) "
 show_always = true
+
+#[hostname]
+#ssh_only = false
+#format = "[$hostname](bold blue):"
 
 [hostname]
 ssh_only = false
-format =  "[$hostname](bold blue) "
+format =  "[$hostname](bold yellow):"
 
 [directory]
+read_only = " "
 truncation_length = 8
 truncation_symbol = "…/"
 home_symbol = "~"
@@ -35,6 +50,6 @@ renamed = '[»\($count\)](white)'
 deleted = '[\($count\)](red)'
 
 [character]
-success_symbol = "[ √](bold green)"
-error_symbol = "[  ](bold red)"
-vicmd_symbol = "[  ](bold green)"
+success_symbol = "[ √ [\\$](bold white)](bold green)"
+error_symbol = "[ ✗ [\\$](bold white)](bold red)"
+vicmd_symbol = "[  [\\$](bold white)](bold green)"
